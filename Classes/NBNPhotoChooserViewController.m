@@ -60,7 +60,6 @@ static CGFloat const NBNDefaultCellSpacing = 12;
     [photoMiner getAllPicturesCompletion:^(NSArray *images) {
         self.images = [[NSArray alloc] initWithArray:images];
         [self.collectionView reloadData];
-        [self scrollToBottom:NO];
     }];
 }
 
@@ -112,7 +111,7 @@ static CGFloat const NBNDefaultCellSpacing = 12;
 }
 
 - (BOOL)isCaptureCellInIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.images.count && [self hasCamera]) {
+    if (indexPath.row == 0 && [self hasCamera]) {
         return YES;
     }
 
