@@ -208,11 +208,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.imagePickerController.delegate = self;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imagePickerController.showsCameraControls = YES;
-    if (self.shouldAnimateImagePickerTransition && [self.imagePickerController respondsToSelector:@selector(transitioningDelegate)]) {
-        self.transitioningDelegate = [[NBNTransitioningDelegate alloc] init];
-        self.imagePickerController.transitioningDelegate = self.transitioningDelegate;
-    }
-
     [self.navigationController presentViewController:self.imagePickerController animated:self.shouldAnimateImagePickerTransition completion:nil];
 }
 
@@ -251,8 +246,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self didChooseImage:info];
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
