@@ -43,7 +43,11 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
                                                          scale:1.0
                                                    orientation:0];
 
-                    [self.mutableArray addObject:@{NBNPhotoMinerKeyImage: image, NBNPhotoMinerKeyFullImageURL: [result valueForProperty:ALAssetPropertyAssetURL]}];
+                    NSDictionary *object = @{NBNPhotoMinerKeyImage: image, NBNPhotoMinerKeyFullImageURL: [result valueForProperty:ALAssetPropertyAssetURL]};
+                    if (self.mutableArray.count > 0) {
+                        return [self.mutableArray insertObject:object atIndex:0];
+                    }
+                    [self.mutableArray addObject:object];
                 }
             }
         }];
