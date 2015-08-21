@@ -247,10 +247,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [self.delegate photoChooserController:self didChooseImage:image];
-    }];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.delegate photoChooserController:self didChooseImage:image];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
