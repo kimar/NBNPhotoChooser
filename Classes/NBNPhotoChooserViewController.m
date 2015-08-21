@@ -48,6 +48,7 @@ static CGFloat const NBNDefaultCellSpacing = 12;
     [self setupCellSize];
     [self setupNavigationBar];
     [self registerCellTypes];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
